@@ -14,8 +14,8 @@ This project consists of a OnlineJudge API built with Express.js and MongoDB. Th
 
 1. **Clone the repository**:
     ```sh
-    git clone https://github.com/yourusername/your-repo.git
-    cd your-repo
+    git clone https://github.com/Thurzinhu/OnlineJudgeAPI.git
+    cd OnlineJudgeAPI
     ```
 
 2. **Install dependencies**:
