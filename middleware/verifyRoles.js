@@ -1,6 +1,5 @@
 // list of verified roles to hit an endpoint
 // check if current user has some role in allowedRoles
-
 const verifyRoles = (...allowedRoles) => {
     return (req, res, next) => {
         if (!req?.userRole)
