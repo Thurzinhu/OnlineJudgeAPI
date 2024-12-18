@@ -5,6 +5,7 @@ const app = express();
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
 const connectDb = require('./config/dbConnection');
+const setupSwagger = require('./utils/swagger');
 const PORT = process.env.PORT || 3500;
 
 connectDb();
@@ -18,6 +19,8 @@ app.use('/api/auth', require('./routes/auth'));
 app.use('/api/user', require('./routes/user'));
 app.use('/api/problems', require('./routes/problems'));
 app.use('/api/submissions', require('./routes/submissions'));
+
+setupSwagger(app);
 
 mongoose.connection.once('open', () => {
     console.log('Connected to db');
