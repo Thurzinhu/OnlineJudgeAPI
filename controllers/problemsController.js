@@ -1,5 +1,6 @@
 const Problem = require('../models/Problem');
 const mongoose = require('mongoose');
+const { getFileContent } = require('../utils/fileManager');
 
 const getProblemById = async (req, res) => {
     try {
@@ -25,14 +26,20 @@ const getAllProblems = async (req, res) => {
 };
 
 const createProblem = async (req, res) => {
-    const { title, description, constraints, inputFiles, outputFiles } = req.body;
+    const { title, description, constraints } = req.body;
     if (!title || !description || !constraints)
     {
         return res.status(400).json({ message: 'Title, description and constraints are required' });
     }
-    if (!inputFiles || !outputFiles)
+    const inputFiles = req.files?.inputFiles?.map(file => getFileContent(file));
+    const solutionCode = req.files?.solutionFile?.map(file => getFileContent(file))[0];
+    if (!inputFiles)
     {
-        return res.status(400).json({ message: 'input and outfiles are required' });
+        return res.status(400).json({ message: 'input files are required' });
+    }
+    if (!solutionCode)
+    {
+        return res.status(400).json({ message: 'Solution code is required' });
     }
     try {
         const newProblem = await Problem.create({
@@ -40,15 +47,17 @@ const createProblem = async (req, res) => {
             description,
             constraints,
             inputFiles,
-            outputFiles,
-            author: req.userId
+            author: req.userId,
+            solutionCode
         });
         res.status(201).json(newProblem);
     } catch(err) {
-        res.status(500).json({ error: err.message() });
+        res.status(500).json({ error: err.message });
     }
 };
 
+// TODO
+// update this function so that it also updates the input and solution files
 const updateProblem = async (req, res) => {
     try {
         const id = req.params.id;

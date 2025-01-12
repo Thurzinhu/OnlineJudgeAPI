@@ -18,8 +18,8 @@ const problemSchema = new Schema({
         type: [String],
         required: true
     },
-    outputFiles: {
-        type: [String],
+    solutionCode: {
+        type: String,
         required: true
     },
     author: {
