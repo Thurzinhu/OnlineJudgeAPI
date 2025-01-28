@@ -1,6 +1,12 @@
+const path = require('path');
+
 const getFileContent = (file) => {
     return file.buffer.toString('utf-8');
 };
+
+const getFileExtension = (file) => {
+    return path.extname(file.originalname).toLowerCase();
+}
 
 const fileIsValidMediaType = (file, MIMETypes) => {
     for (let type of MIMETypes)
@@ -13,4 +19,8 @@ const fileIsValidMediaType = (file, MIMETypes) => {
     return false;
 };
 
-module.exports = { getFileContent, fileIsValidMediaType };
+module.exports = { 
+    getFileExtension,
+    getFileContent,
+    fileIsValidMediaType
+};
