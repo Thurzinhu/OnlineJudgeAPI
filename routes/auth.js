@@ -4,6 +4,7 @@ const authController = require('../controllers/auth/authController');
 const logoutController = require('../controllers/auth/logoutController');
 const registerController = require('../controllers/auth/registerController');
 const refreshTokenController = require('../controllers/auth/refreshTokenController');
+const { checkUserData } = require('../middleware/verifyModelData/verifyUserData');
 
 /**
  * @swagger
@@ -119,7 +120,9 @@ router.route('/logout')
  *         description: Internal server error
  */
 router.route('/register')
-    .post(registerController.handleNewUser);
+    .post(
+        checkUserData,
+        registerController.handleNewUser);
 
 /**
  * @swagger

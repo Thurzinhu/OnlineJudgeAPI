@@ -1,50 +1,38 @@
 const multer = require('multer');
 const storage = multer.memoryStorage();
-const { fileIsValidMediaType } = require('../utils/fileManager');
+const { fileIsValidMediaType, getFileExtension } = require('../utils/fileManager');
+const MAX_TEST_CASES_COUNT = 40;
 
 function fileFilter(req, file, cb) {
-    if (file.fieldname == 'inputFiles')
-    {
-        if (!fileIsValidMediaType(file, ['text/plain']))
-        {
+    if (file.fieldname == 'testCases') {
+        const extension = getFileExtension(file);
+        if (!fileIsValidMediaType(file, ['text/plain', 'application/octet-stream']) || (extension !== '.in' && extension !== '.out')) {
             cb(null, false);
+        } else {
+            cb(null, true);
         }
-        else
-        {
+    } else {
+        if (!fileIsValidMediaType(file, ['application/javascript', 'text/javascript'])) {
+            cb(null, false);
+        } else {
             cb(null, true);
         }
     }
-    else
-    {
-        if (!fileIsValidMediaType(file, ['application/javascript', 'text/javascript']))
-        {
-            cb(null, false);
-        }
-        else
-        {
-            cb(null, true);
-        }
-    }
-};
-
-const inputFiles = {
-    name: 'inputFiles',
-    maxCount: 40,
 }
 
-const solutionFile = {
-    name: 'solutionFile', 
-    maxCount: 1, 
-};
+const testCases = {
+    name: 'testCases',
+    maxCount: MAX_TEST_CASES_COUNT,
+}
 
-const uploadInputAndSolutionFiles = multer({
+const uploadTestCaseFiles = multer({
     storage: storage,
     limits: {
         fileSize: 1024 * 1024 * 2 // 2 MB 
     },
     fileFilter: fileFilter
 }).fields([
-    inputFiles, solutionFile
+    testCases
 ]);
 
-module.exports = { uploadInputAndSolutionFiles };
+module.exports = { uploadTestCaseFiles };

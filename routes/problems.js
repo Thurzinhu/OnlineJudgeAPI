@@ -2,8 +2,9 @@ const express = require('express');
 const router = express.Router();
 const problemsController = require('../controllers/problemsController');
 const verifyJWT = require('../middleware/verifyJWT');
-const { uploadInputAndSolutionFiles } = require('../middleware/uploadFiles');
-const MAX_INPUT_FILES_COUNT = 40;
+const { checkProblemData } = require('../middleware/verifyModelData/verifyProblemData');
+const { checkTestCaseFiles } = require('../middleware/verifyModelData/verifyTestCaseData');
+const { uploadTestCaseFiles } = require('../middleware/uploadFiles');
 
 /**
  * @swagger
@@ -60,7 +61,9 @@ router.route('/')
     .get(problemsController.getAllProblems)
     .post(
         verifyJWT,
-        uploadInputAndSolutionFiles,
+        uploadTestCaseFiles,
+        checkTestCaseFiles,
+        checkProblemData,
         problemsController.createProblem
     );
 
@@ -146,10 +149,10 @@ router.route('/')
 router.route('/:id')
     .get(problemsController.getProblemById)
     .delete(verifyJWT, problemsController.deleteProblem)
-    .post(
+    .put(
         verifyJWT,
-        uploadInputAndSolutionFiles,
+        uploadTestCaseFiles,
         problemsController.updateProblem
-    );;
+    );
 
 module.exports = router;

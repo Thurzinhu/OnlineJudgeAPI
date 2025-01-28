@@ -70,8 +70,8 @@ router.use(verifyJWT);
  *         description: Internal server error
  */
 router.route('/')
-    .post(submissionsController.createSubmission)
-    .get(submissionsController.getAllSubmissions);
+    .get(submissionsController.getAllSubmissions)
+    .post(submissionsController.createSubmission);
 
 /**
  * @swagger
