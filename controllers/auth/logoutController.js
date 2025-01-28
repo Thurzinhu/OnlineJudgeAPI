@@ -1,4 +1,5 @@
-const User = require('../../models/User');
+const UserDAO = require('../../persistence/dao/UserDAO');
+const userDAO = new UserDAO();
 
 const handleLogout = async (req, res) => {
     // On client, also delete the accessToken
@@ -16,13 +17,12 @@ const handleLogout = async (req, res) => {
             secure: true
         }
     );
-    const foundUser = await User.findOne({ refreshToken });
+    const foundUser = await userDAO.getByRefreshToken(refreshToken);
     if (!foundUser)
     {
         return res.sendStatus(204);
     }
-    foundUser.refreshToken = '';
-    await foundUser.save();
+    await userDAO.resetRefreshToken(foundUser._id);
     res.sendStatus(204);
 }
 

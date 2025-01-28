@@ -1,5 +1,6 @@
 const jwt = require('jsonwebtoken');
-const User = require('../../models/User');
+const UserDAO = require('../../persistence/dao/UserDAO');
+const userDAO = new UserDAO();
 
 const handleRefreshToken = async (req, res) => {
     const cookies = req.cookies;
@@ -8,10 +9,10 @@ const handleRefreshToken = async (req, res) => {
         return res.sendStatus(401);
     }
     const refreshToken = cookies.jwt;
-    const foundUser = await User.findOne({ refreshToken }).exec();
+    const foundUser = await userDAO.getByRefreshToken(refreshToken);
     if (!foundUser)
     {
-        return res.sendStatus(403); // forbiddens
+        return res.sendStatus(403); // forbidden
     }
     jwt.verify(
         refreshToken,

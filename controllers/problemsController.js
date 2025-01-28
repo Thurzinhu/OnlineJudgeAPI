@@ -1,15 +1,9 @@
-const Problem = require('../models/Problem');
-const mongoose = require('mongoose');
-const { getFileContent } = require('../utils/fileManager');
+const ProblemDAO = require('../persistence/dao/ProblemDAO');
+const problemDAO = new ProblemDAO();
 
 const getProblemById = async (req, res) => {
     try {
-        const id = req.params.id;
-        const foundProblem = await Problem.findOne({ _id: id});
-        if (!foundProblem)
-        {
-            return res.status(404).json({ message: `No problem matches ID ${id}.` });
-        }
+        const foundProblem = await problemDAO.getById(req.params.id);
         res.json(foundProblem);
     } catch (err) {
         res.status(500).json({ error: err.message });
@@ -17,7 +11,7 @@ const getProblemById = async (req, res) => {
 };
 
 const getAllProblems = async (req, res) => {
-    const problems = await Problem.find();
+    const problems = await problemDAO.getAll();
     if (!problems)
     {
         return res.status(204).json({ message: 'No problems found.' });
@@ -26,30 +20,13 @@ const getAllProblems = async (req, res) => {
 };
 
 const createProblem = async (req, res) => {
-    const { title, description, constraints } = req.body;
-    if (!title || !description || !constraints)
-    {
-        return res.status(400).json({ message: 'Title, description and constraints are required' });
-    }
-    const inputFiles = req.files?.inputFiles?.map(file => getFileContent(file));
-    const solutionCode = req.files?.solutionFile?.map(file => getFileContent(file))[0];
-    if (!inputFiles)
-    {
-        return res.status(400).json({ message: 'input files are required' });
-    }
-    if (!solutionCode)
-    {
-        return res.status(400).json({ message: 'Solution code is required' });
-    }
     try {
-        const newProblem = await Problem.create({
-            title,
-            description,
-            constraints,
-            inputFiles,
+        const problemData = {
+            ...req.body,
             author: req.userId,
-            solutionCode
-        });
+            testCases: req.files.testCases
+        }
+        const newProblem = await problemDAO.create(problemData);
         res.status(201).json(newProblem);
     } catch(err) {
         res.status(500).json({ error: err.message });
@@ -79,18 +56,12 @@ const updateProblem = async (req, res) => {
 
 const deleteProblem = async (req, res) => {
     try {
-        const id = req.params.id;
-        const foundProblem = await Problem.findById(id);
-        if (!foundProblem)
-        {
-            return res.status(404).json({ message: `No problem matches ID ${id}.` });
-        }
-        await Problem.findByIdAndDelete(id);
+        await problemDAO.delete(req.params.id);
         res.sendStatus(204);
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
-}
+};
 
 module.exports = {
     getAllProblems,

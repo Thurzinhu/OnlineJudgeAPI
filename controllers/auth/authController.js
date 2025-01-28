@@ -1,6 +1,7 @@
-const User = require('../../models/User');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
+const UserDAO = require('../../persistence/dao/UserDAO');
+const userDAO = new UserDAO();
 
 const handleLogin = async (req, res) => {
     const { email , password } = req.body;
@@ -8,7 +9,7 @@ const handleLogin = async (req, res) => {
     {
         return res.status(400).json({ message : 'Email and password are required'});
     }
-    const foundUser = await User.findOne({ email });
+    const foundUser = await userDAO.getByEmail(email);
     if (!foundUser)
     {
         return res.status(401).json({ message: 'There is no user with this email' });
@@ -31,9 +32,7 @@ const handleLogin = async (req, res) => {
             process.env.REFRESH_TOKEN_SECRET,
             { expiresIn: '1d' }
         );
-        // saving refresh token with current user
-        foundUser.refreshToken = refreshToken;
-        await foundUser.save();
+        await userDAO.saveRefreshToken(foundUser._id, refreshToken);
         res.cookie(
             'jwt',
             refreshToken,
