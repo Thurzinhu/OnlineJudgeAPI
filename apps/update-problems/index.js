@@ -22,7 +22,12 @@ async function upsertProblemToDb(problemSlug) {
         if (await problemDAO.getByTitle(title)) {
             return;
         }
-        const newProblem = await problemDAO.create({ description, title });
+        const problemData = {
+            description,
+            title,
+            slug: problemSlug
+        }
+        const newProblem = await problemDAO.create(problemData);
         await Promise.all(
             Object.keys(supportedLanguages).map(async (language) => {
                 const boilerplate = fs.readFileSync(path.join(problemPath, 'boilerplate', `function.${language}`));
