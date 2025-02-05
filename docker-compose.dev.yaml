@@ -16,7 +16,7 @@ services:
       - mongo
       - judge0
     volumes:
-      - .:/usr/src/app
+      - ./apps/web:/usr/src/app/apps/web
 
   mongo:
     image: mongo
