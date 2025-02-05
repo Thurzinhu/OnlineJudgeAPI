@@ -19,11 +19,8 @@ const getSubmissionById = async (req, res) => {
     res.json(submissionFound);
 };
 
+// 1?28
 const createSubmission = async (req, res) => {
-    const { problem, code, language } = req.body;
-    if (!problem || !code || !language) {
-        return res.status(400).json({ message: 'Problem, code, and language fields are required' });
-    }
     try {
         const submissionData = {
             ...req.body,

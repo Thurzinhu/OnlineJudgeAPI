@@ -23,8 +23,7 @@ const createProblem = async (req, res) => {
     try {
         const problemData = {
             ...req.body,
-            author: req.userId,
-            testCases: req.files.testCases
+            author: req.userId
         }
         const newProblem = await problemDAO.create(problemData);
         res.status(201).json(newProblem);

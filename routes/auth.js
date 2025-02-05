@@ -4,7 +4,7 @@ const authController = require('../controllers/auth/authController');
 const logoutController = require('../controllers/auth/logoutController');
 const registerController = require('../controllers/auth/registerController');
 const refreshTokenController = require('../controllers/auth/refreshTokenController');
-const { checkUserData } = require('../middleware/verifyModelData/verifyUserData');
+const { checkUserData } = require('../middleware/verifyModelData/User');
 
 /**
  * @swagger

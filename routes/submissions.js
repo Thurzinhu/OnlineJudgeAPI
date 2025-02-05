@@ -2,6 +2,8 @@ const express = require('express');
 const router = express.Router();
 const submissionsController = require('../controllers/submissionsController');
 const verifyJWT = require('../middleware/verifyJWT');
+const { checkSubmissionData } = require('../middleware/verifyModelData/Submission');
+
 /**
  * @swagger
  * tags:
@@ -71,7 +73,7 @@ router.use(verifyJWT);
  */
 router.route('/')
     .get(submissionsController.getAllSubmissions)
-    .post(submissionsController.createSubmission);
+    .post(checkSubmissionData, submissionsController.createSubmission);
 
 /**
  * @swagger

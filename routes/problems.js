@@ -2,8 +2,8 @@ const express = require('express');
 const router = express.Router();
 const problemsController = require('../controllers/problemsController');
 const verifyJWT = require('../middleware/verifyJWT');
-const { checkProblemData } = require('../middleware/verifyModelData/verifyProblemData');
-const { checkTestCaseFiles } = require('../middleware/verifyModelData/verifyTestCaseData');
+const { checkProblemData } = require('../middleware/verifyModelData/Problem');
+const { checkTestCaseFiles } = require('../middleware/verifyModelData/TestCase');
 const { uploadTestCaseFiles } = require('../middleware/uploadFiles');
 
 /**
