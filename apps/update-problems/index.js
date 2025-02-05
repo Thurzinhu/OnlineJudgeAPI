@@ -9,7 +9,7 @@ const supportedLanguages = require('../../config/languages_list');
 const problemDAO = new ProblemDAO();
 const defaultCodeDAO = new DefaultCodeDAO();
 
-const MOUNT_PATH = path.join(__dirname, '../problems');
+const MOUNT_PATH = process.env.MOUNT_PATH ?? path.join(__dirname, '../problems');
 
 async function upsertProblemToDb(problemSlug) {
     const problemPath = path.join(MOUNT_PATH, problemSlug);

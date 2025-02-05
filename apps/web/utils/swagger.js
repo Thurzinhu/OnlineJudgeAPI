@@ -83,19 +83,16 @@ const options = {
                             },
                             description: 'List of input file URLs or paths.'
                         },
-                        outputFiles: {
-                            type: 'array',
-                            items: {
-                                type: 'string'
-                            },
-                            description: 'List of output file URLs or paths.'
+                        solutionCode: {
+                            type: 'string',
+                            description: 'Code that solves the problem.'
                         },
                         author: {
                             type: 'string',
                             description: 'The ID of the user who created the problem.'
                         }
                     },
-                    required: ['title', 'description', 'constraints', 'inputFiles', 'outputFiles', 'author']
+                    required: ['title', 'description', 'constraints', 'inputFiles', 'solutionCode', 'author']
                 },
                 Submission: {
                     type: 'object',

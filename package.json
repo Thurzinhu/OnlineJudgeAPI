@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node index.js",
-    "dev": "nodemon index.js",
+    "start": "node ./apps/web/index.js",
+    "dev": "nodemon ./apps/web/index.js",
     "db:problems": "node ./apps/update-problems/index.js",
     "boilerplate": "node ./apps/boilerplate-generator/index.js"
   },
