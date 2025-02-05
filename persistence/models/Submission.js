@@ -18,7 +18,7 @@ const submissionSchema = new Schema({
     },
     language: {
         type: String,
-        required: true
+        default: 'js'
     },
     status: {
         type: String,
@@ -28,7 +28,15 @@ const submissionSchema = new Schema({
     createdAt: {
         type: Date,
         default: Date.now
-    }
+    },
+    judge0SubmissionToken: {
+        type: String,
+        required: true
+    },
+    testCases: [{
+        type: Schema.Types.ObjectId,
+        ref: 'TestCase',
+    }]
 });
 
 module.exports = mongoose.model('Submission', submissionSchema);

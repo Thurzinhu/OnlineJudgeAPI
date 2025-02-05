@@ -1,4 +1,4 @@
-const ITestCaseDAO = require('./ITestCaseDAO');
+const ITestCaseDAO = require('./interfaces/ITestCaseDAO');
 const TestCase = require('../models/TestCase');
 
 class TestCaseDAO extends ITestCaseDAO {

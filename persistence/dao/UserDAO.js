@@ -1,4 +1,4 @@
-const IUserDAO = require('./IUserDAO');
+const IUserDAO = require('./interfaces/IUserDAO');
 const User = require('../models/User');
 const bcrypt = require('bcrypt');
 

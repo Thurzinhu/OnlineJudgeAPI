@@ -1,19 +1,19 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
-const problemSchema = new Schema({
-    title: {
-        type: String,
-        required: true,
-        unique: true
-    },
-    description: {
+const defaultCodeSchema = new Schema({
+    boilerplate: {
         type: String,
         required: true
     },
-    author: {
+    language: {
+        type:String,
+        default: 'js'
+    },
+    problem: {
         type: Schema.Types.ObjectId,
-        ref: 'User'
+        ref: 'Problem',
+        required: true
     },
     createdAt: {
         type: Date,
@@ -25,4 +25,4 @@ const problemSchema = new Schema({
     }
 });
 
-module.exports = mongoose.model('Problem', problemSchema);
+module.exports = mongoose.model('DefaultCode', defaultCodeSchema);

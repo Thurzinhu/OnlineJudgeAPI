@@ -2,13 +2,23 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema;
 
 const testCaseSchema = new Schema({
-    input: {
-        type: String,
+    submission: {
+        type: Schema.Types.ObjectId,
+        ref: 'Submission',
         required: true
     },
-    output: {
+    status: {
         type: String,
-        required: true
+        enum: ['AC', 'WA', 'RE', 'CE', 'TLE', 'Pending'],
+        default: 'Pending'
+    },
+    time: {
+        type: Number,
+        required: false
+    },
+    memory: {
+        type: Number,
+        required: false
     }
 });
 
