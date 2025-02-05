@@ -19,6 +19,7 @@ app.use('/api/auth', require('./routes/auth'));
 app.use('/api/user', require('./routes/user'));
 app.use('/api/problems', require('./routes/problems'));
 app.use('/api/submissions', require('./routes/submissions'));
+app.use('/api/default_code', require('./routes/default_code'));
 
 setupSwagger(app);
 

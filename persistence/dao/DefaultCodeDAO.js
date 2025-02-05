@@ -20,6 +20,11 @@ class DefaultCodeDAO extends IDefaultCodeDAO {
         const foundDefaultCode = await DefaultCode.findOne({ _id: id}); 
         return foundDefaultCode;
     }
+    
+    async getByProblem(problemId) {
+        const foundDefaultCode = await DefaultCode.findOne({ problem: problemId }); 
+        return foundDefaultCode;
+    }
 
     async getAll() {
     }
