@@ -1,24 +1,22 @@
 const ISubmissionDAO = require('./interfaces/ISubmissionDAO');
 const Submission = require('../models/Submission');
-const ProblemDAO = require('./ProblemDAO');
-const problemDAO = new ProblemDAO();
 
 class SubmissionDAO extends ISubmissionDAO {
     constructor() { super(); }
 
     async create(submission) {
-        const { problem, code, language } = submission;
-        const foundProblem = await problemDAO.getById(problem);
-        // const evaluationResult = await evaluateSolution(foundProblem, code, language);
-        const newSubmission = {
-            ...submission,
-            evaluationResult
-        };
+        const newSubmission = await Submission.create(submission);
         return newSubmission;
     }
 
     async update(id, fields) {
-
+        const submission = await this.getById(id);
+        if (!submission) {
+            throw new Error('Submission not found');
+        }
+        Object.assign(submission, fields);
+        await submission.save();
+        return submission;
     }
 
     async delete(id) {

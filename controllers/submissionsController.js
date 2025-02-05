@@ -1,5 +1,8 @@
 const SubmissionDAO = require('../persistence/dao/SubmissionDAO');
 const submissionDAO = new SubmissionDAO();
+const TestCaseDAO = require('../persistence/dao/TestCaseDAO');
+const testCaseDAO = new TestCaseDAO();
+const { handleJudgeSubmission } = require('../utils/judge0SubmissionHandler');
 
 const getAllSubmissions = async (req, res) => {
     const submissions = await submissionDAO.getAllByUser(req.userId);
@@ -19,15 +22,25 @@ const getSubmissionById = async (req, res) => {
     res.json(submissionFound);
 };
 
-// 1?28
 const createSubmission = async (req, res) => {
     try {
         const submissionData = {
             ...req.body,
             user: req.userId
         };
+        const judge0TrackingIds = await handleJudgeSubmission(submissionData);
         const newSubmission = await submissionDAO.create(submissionData);
-        res.status(201).json(newSubmission);
+        const testCases = await Promise.all(
+            judge0TrackingIds.map(async (judge0TrackingId) => {
+                return testCaseDAO.create({
+                    submission: newSubmission._id,
+                    judge0TrackingId: judge0TrackingId.token
+                });
+            })
+        );
+        const testCaseIds = testCases.map(testCase => testCase._id);
+        const submission = await submissionDAO.update(newSubmission._id, { testCases: testCaseIds });
+        res.status(201).json(submission);
     } catch (error) {
         res.status(500).json({ message: error.message });
     }

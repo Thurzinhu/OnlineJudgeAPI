@@ -29,10 +29,6 @@ const submissionSchema = new Schema({
         type: Date,
         default: Date.now
     },
-    judge0SubmissionToken: {
-        type: String,
-        required: true
-    },
     testCases: [{
         type: Schema.Types.ObjectId,
         ref: 'TestCase',

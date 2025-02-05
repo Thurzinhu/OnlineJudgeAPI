@@ -16,7 +16,7 @@ class UserDAO extends IUserDAO {
     
     async update(id, fields) {
         const { password, ...fieldsToUpdate } = fields;
-        const user = await User.findById(id);
+        const user = await this.getById(id);
         if (!user) {
             throw new Error('User not found');
         }

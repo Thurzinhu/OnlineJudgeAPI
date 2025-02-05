@@ -1,14 +1,23 @@
+x-logging:
+  &default-logging
+  logging:
+    driver: json-file
+    options:
+      max-size: 100M
+
 services:
   app:
     build:
       context: .
-      target: development
+      target: production
     ports:
       - "3500:3500"
     depends_on:
       - mongo
+      - judge0
     volumes:
       - .:/usr/src/app
+
   mongo:
     image: mongo
     ports:
@@ -16,5 +25,43 @@ services:
     volumes:
       - mongodb-data:/data/db
 
+  judge0:
+    image: judge0/judge0:1.13.1
+    volumes:
+      - ./apps/judge0/judge0.conf:/judge0.conf:ro
+    ports:
+      - "2358:2358"
+    privileged: true
+    <<: *default-logging
+    restart: always
+
+  workers:
+    image: judge0/judge0:1.13.1
+    command: ["./scripts/workers"]
+    volumes:
+      - ./apps/judge0/judge0.conf:/judge0.conf:ro
+    privileged: true
+    <<: *default-logging
+    restart: always
+
+  db:
+    image: postgres:16.2
+    env_file: ./apps/judge0/judge0.conf
+    volumes:
+      - postgres-data:/var/lib/postgresql/data/
+    <<: *default-logging
+    restart: always
+
+  redis:
+    image: redis:7.2.4
+    command: [
+      "bash", "-c",
+      'docker-entrypoint.sh --appendonly no --requirepass "$$REDIS_PASSWORD"'
+    ]
+    env_file: ./apps/judge0/judge0.conf
+    <<: *default-logging
+    restart: always
+
 volumes:
   mongodb-data:
+  postgres-data:

@@ -5,7 +5,6 @@ const getDefaultCodeByProblem = async (req, res) => {
     try {
         const id = req.params.id;
         const defaultCode = await defaultCodeDAO.getByProblem(id);
-        console.log(id, defaultCode);
         if (!defaultCode) {
             return res.status(404).json({ message: `No problem matches ID ${id}.` });
         }

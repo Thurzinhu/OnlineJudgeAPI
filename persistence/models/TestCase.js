@@ -13,12 +13,14 @@ const testCaseSchema = new Schema({
         default: 'Pending'
     },
     time: {
-        type: Number,
-        required: false
+        type: Number
     },
     memory: {
-        type: Number,
-        required: false
+        type: Number
+    },
+    judge0TrackingId: {
+        type: String,
+        required: true
     }
 });
 
