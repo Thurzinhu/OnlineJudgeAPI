@@ -1,0 +1,6 @@
+problem_title: "Maioral"
+function_name: maioral
+input_fields:
+  - type: list<int>
+    name: nums
+output_field: int

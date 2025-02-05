@@ -1,0 +1,20 @@
+services:
+  app:
+    build:
+      context: .
+      target: development
+    ports:
+      - "3500:3500"
+    depends_on:
+      - mongo
+    volumes:
+      - .:/usr/src/app
+  mongo:
+    image: mongo
+    ports:
+      - "27017:27017"
+    volumes:
+      - mongodb-data:/data/db
+
+volumes:
+  mongodb-data:

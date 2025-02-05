@@ -1,0 +1,8 @@
+problem_title: "HayDay"
+function_name: hayDay
+input_fields:
+  - type: list<int>
+    name: estoque
+  - type: list<string>
+    name: pedido
+output_field: int
