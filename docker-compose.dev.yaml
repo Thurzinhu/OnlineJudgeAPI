@@ -16,7 +16,21 @@ services:
       - mongo
       - judge0
     volumes:
-      - ./apps/web:/usr/src/app/apps/web
+      - ./apps/web:/usr/src/app/web
+    env_file: .env
+  
+  submission-webhook:
+    build:
+      context: .
+      target: submission-webhook-development
+    expose:
+      - "4000"
+    volumes:
+      - ./apps/submission-webhook:/usr/src/app/submission-webhook
+    depends_on:
+      - mongo
+      - judge0
+    env_file: .env
 
   mongo:
     image: mongo

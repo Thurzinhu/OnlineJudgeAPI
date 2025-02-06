@@ -3,8 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node ./apps/web/index.js",
-    "dev": "nodemon ./apps/web/index.js",
+    "start": "node ./web/index.js",
+    "dev": "nodemon ./web/index.js",
+    "submission-webhook": "nodemon ./submission-webhook/index.js",
+    "submission-webhook-production": "node ./submission-webhook/index.js",
     "db:problems": "node ./apps/update-problems/index.js",
     "boilerplate": "node ./apps/boilerplate-generator/index.js"
   },

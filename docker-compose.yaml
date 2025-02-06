@@ -14,7 +14,18 @@ services:
       - "3500:3500"
     depends_on:
       - mongo
+    env_file: .env
+  
+  submission-webhook:
+    build:
+      context: .
+      target: submission-webhook-production
+    expose:
+      - "4000"
+    depends_on:
+      - mongo
       - judge0
+    env_file: .env
 
   mongo:
     image: mongo
