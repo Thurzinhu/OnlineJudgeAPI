@@ -1,6 +1,7 @@
 FROM node:18-bullseye AS base
 WORKDIR /usr/src/app
 COPY package* .
+COPY ./lib ./lib
 RUN npm install
 
 FROM base AS development

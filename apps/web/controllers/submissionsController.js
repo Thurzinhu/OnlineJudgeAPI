@@ -1,25 +1,33 @@
-const SubmissionDAO = require('../persistence/dao/SubmissionDAO');
+const SubmissionDAO = require('../../lib/persistence/dao/SubmissionDAO');
 const submissionDAO = new SubmissionDAO();
-const TestCaseDAO = require('../persistence/dao/TestCaseDAO');
+const TestCaseDAO = require('../../lib/persistence/dao/TestCaseDAO');
 const testCaseDAO = new TestCaseDAO();
 const { handleJudgeSubmission } = require('../utils/judge0SubmissionHandler');
 
 const getAllSubmissions = async (req, res) => {
-    const submissions = await submissionDAO.getAllByUser(req.userId);
-    if (!submissions)
-    {
-        return res.status(204).json({ message: 'No submissions found.' });
+    try {
+        const submissions = await submissionDAO.getAllByUser(req.userId);
+        if (!submissions)
+        {
+            return res.status(204).json({ message: 'No submissions found.' });
+        }
+        res.json(submissions);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
     }
-    res.json(submissions);
 };
 
 const getSubmissionById = async (req, res) => {
-    const submissionFound = await submissionDAO.getById(req.params.id);
-    if (!submissionFound)
-    {
-        return res.status(204).json({ message: `No problem submission ID ${req.params.id}.` });
+    try {
+        const submissionFound = await submissionDAO.getById(req.params.id);
+        if (!submissionFound)
+        {
+            return res.status(204).json({ message: `No problem submission ID ${req.params.id}.` });
+        }
+        res.json(submissionFound);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
     }
-    res.json(submissionFound);
 };
 
 const createSubmission = async (req, res) => {

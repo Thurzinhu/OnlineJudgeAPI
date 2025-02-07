@@ -1,9 +1,9 @@
 const path = require('path');
 const axios = require('axios');
 const { getProblemFilesContent, getProblemFullBoilerplate } = require('./fileManager');
-const ProblemDAO = require('../persistence/dao/ProblemDAO');
+const ProblemDAO = require('../../lib/persistence/dao/ProblemDAO');
 const problemDAO = new ProblemDAO();
-const supportedLanguages = require('../config/languages_list');
+const supportedLanguages = require('../../lib/config/languages_list');
 const MOUNT_PATH = process.env.MOUNT_PATH ?? path.join(__dirname, '../apps/problems');
 const JUDGE0_URI = process.env.JUDGE0_URI ?? 'http://judge0:2358';
 const JUDGE0_CALLBACK_URL = process.env.JUDGE0_CALLBACK_URL ?? 'http://app:3500/submission-webhook';

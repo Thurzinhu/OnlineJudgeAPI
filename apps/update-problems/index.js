@@ -2,10 +2,10 @@ const fs = require('fs');
 const path = require('path');
 const mongoose = require('mongoose');
 const ProblemDefinitionParser = require('../boilerplate-generator/ProblemDefinitionParser');
-const connectDb = require('../../config/dbConnection');
-const ProblemDAO = require('../../persistence/dao/ProblemDAO');
-const DefaultCodeDAO = require('../../persistence/dao/DefaultCodeDAO');
-const supportedLanguages = require('../../config/languages_list');
+const connectDb = require('../lib/config/dbConnection');
+const ProblemDAO = require('../lib/persistence/dao/ProblemDAO');
+const DefaultCodeDAO = require('../lib/persistence/dao/DefaultCodeDAO');
+const supportedLanguages = require('../lib/config/languages_list');
 const problemDAO = new ProblemDAO();
 const defaultCodeDAO = new DefaultCodeDAO();
 

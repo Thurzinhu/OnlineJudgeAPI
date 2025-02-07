@@ -1,4 +1,4 @@
-const DefaultCodeDAO = require('../persistence/dao/DefaultCodeDAO');
+const DefaultCodeDAO = require('../../lib/persistence/dao/DefaultCodeDAO');
 const defaultCodeDAO = new DefaultCodeDAO();
 
 const getDefaultCodeByProblem = async (req, res) => {

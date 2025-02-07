@@ -1,4 +1,4 @@
-const UserDAO = require('../../persistence/dao/UserDAO');
+const UserDAO = require('../../../lib/persistence/dao/UserDAO');
 const userDAO = new UserDAO();
 
 const handleLogout = async (req, res) => {

@@ -1,5 +1,5 @@
 const jwt = require('jsonwebtoken');
-const UserDAO = require('../../persistence/dao/UserDAO');
+const UserDAO = require('../../../lib/persistence/dao/UserDAO');
 const userDAO = new UserDAO();
 
 const handleRefreshToken = async (req, res) => {

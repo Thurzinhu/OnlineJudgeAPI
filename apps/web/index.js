@@ -4,7 +4,7 @@ const cors = require('cors');
 const app = express();
 const cookieParser = require('cookie-parser');
 const mongoose = require('mongoose');
-const connectDb = require('./config/dbConnection');
+const connectDb = require('../lib/config/dbConnection');
 const setupSwagger = require('./utils/swagger');
 const PORT = process.env.PORT || 3500;
 

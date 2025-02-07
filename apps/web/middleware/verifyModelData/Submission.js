@@ -1,6 +1,6 @@
-const ProblemDAO = require('../../persistence/dao/ProblemDAO');
+const ProblemDAO = require('../../../lib/persistence/dao/ProblemDAO');
 const problemDAO = new ProblemDAO();
-const supportedLanguages = require('../../config/languages_list');
+const supportedLanguages = require('../../../lib/config/languages_list');
 
 const checkSubmissionData = async (req, res, next) => {
     const { problem, code, language } = req.body;

@@ -1,6 +1,6 @@
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcrypt');
-const UserDAO = require('../../persistence/dao/UserDAO');
+const UserDAO = require('../../../lib/persistence/dao/UserDAO');
 const userDAO = new UserDAO();
 
 const handleLogin = async (req, res) => {

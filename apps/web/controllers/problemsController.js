@@ -1,4 +1,4 @@
-const ProblemDAO = require('../persistence/dao/ProblemDAO');
+const ProblemDAO = require('../../lib/persistence/dao/ProblemDAO');
 const problemDAO = new ProblemDAO();
 
 const getProblemById = async (req, res) => {
@@ -11,12 +11,16 @@ const getProblemById = async (req, res) => {
 };
 
 const getAllProblems = async (req, res) => {
-    const problems = await problemDAO.getAll();
-    if (!problems)
-    {
-        return res.status(204).json({ message: 'No problems found.' });
+    try {
+        const problems = await problemDAO.getAll();
+        if (!problems)
+        {
+            return res.status(204).json({ message: 'No problems found.' });
+        }
+        res.json(problems);
+    } catch (error) {
+        res.status(500).json({ message: error.message });
     }
-    res.json(problems);
 };
 
 const createProblem = async (req, res) => {
