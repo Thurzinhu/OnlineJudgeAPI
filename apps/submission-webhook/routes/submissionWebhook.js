@@ -22,10 +22,8 @@ router.route('/')
                 const submission = testCase.submission;
                 const allTestCases = await testCaseDAO.getAllBySubmission(submission);
                 const allTestCasesEvaluated = allTestCases.every(testCase => testCase.status !== 'Pending');
-                console.log(allTestCasesEvaluated);
                 if (allTestCasesEvaluated) {
-                    const up = await submissionDAO.update(submission, { status: getSubmissionStatus(allTestCases)});
-                    console.log(up);
+                    await submissionDAO.update(submission, { status: getSubmissionStatus(allTestCases)});
                 }
                 res.sendStatus(200);
             } catch (err) {
