@@ -18,7 +18,8 @@ services:
     volumes:
       - ./apps/web:/usr/src/app/web
     env_file: .env
-  
+    restart: always
+
   submission-webhook:
     build:
       context: .
@@ -31,6 +32,7 @@ services:
       - mongo
       - judge0
     env_file: .env
+    restart: always
 
   mongo:
     image: mongo
@@ -38,6 +40,7 @@ services:
       - "27017:27017"
     volumes:
       - mongodb-data:/data/db
+    restart: always
 
   judge0:
     image: judge0/judge0:1.13.1
