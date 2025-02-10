@@ -1,10 +1,10 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const authController = require('../controllers/auth/authController');
-const logoutController = require('../controllers/auth/logoutController');
-const registerController = require('../controllers/auth/registerController');
-const refreshTokenController = require('../controllers/auth/refreshTokenController');
-const { checkUserData } = require('../middleware/verifyModelData/User');
+const authController = require("../controllers/auth/authController");
+const logoutController = require("../controllers/auth/logoutController");
+const registerController = require("../controllers/auth/registerController");
+const refreshTokenController = require("../controllers/auth/refreshTokenController");
+const { checkUserData } = require("../middleware/verifyModelData/User");
 
 /**
  * @swagger
@@ -53,8 +53,7 @@ const { checkUserData } = require('../middleware/verifyModelData/User');
  *       500:
  *         description: Internal server error
  */
-router.route('/login')
-    .post(authController.handleLogin);
+router.route("/login").post(authController.handleLogin);
 
 /**
  * @swagger
@@ -68,8 +67,7 @@ router.route('/login')
  *       500:
  *         description: Internal server error
  */
-router.route('/logout')
-    .get(logoutController.handleLogout);
+router.route("/logout").get(logoutController.handleLogout);
 
 /**
  * @swagger
@@ -119,10 +117,7 @@ router.route('/logout')
  *       500:
  *         description: Internal server error
  */
-router.route('/register')
-    .post(
-        checkUserData,
-        registerController.handleNewUser);
+router.route("/register").post(checkUserData, registerController.handleNewUser);
 
 /**
  * @swagger
@@ -148,7 +143,6 @@ router.route('/register')
  *       500:
  *         description: Internal server error
  */
-router.route('/refreshToken')
-    .get(refreshTokenController.handleRefreshToken);
+router.route("/refreshToken").get(refreshTokenController.handleRefreshToken);
 
 module.exports = router;

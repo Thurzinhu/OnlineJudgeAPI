@@ -1,3 +1,3 @@
 function maioral(nums) {
-	//implemente aqui
+  //implemente aqui
 }

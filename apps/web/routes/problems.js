@@ -1,10 +1,12 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const problemsController = require('../controllers/problemsController');
-const verifyJWT = require('../middleware/verifyJWT');
-const { checkProblemData } = require('../middleware/verifyModelData/Problem');
-const { checkTestCaseFiles } = require('../middleware/verifyModelData/TestCase');
-const { uploadTestCaseFiles } = require('../middleware/uploadFiles');
+const problemsController = require("../controllers/problemsController");
+const verifyJWT = require("../middleware/verifyJWT");
+const { checkProblemData } = require("../middleware/verifyModelData/Problem");
+const {
+  checkTestCaseFiles,
+} = require("../middleware/verifyModelData/TestCase");
+const { uploadTestCaseFiles } = require("../middleware/uploadFiles");
 
 /**
  * @swagger
@@ -57,15 +59,16 @@ const { uploadTestCaseFiles } = require('../middleware/uploadFiles');
  *       500:
  *         description: Internal server error
  */
-router.route('/')
-    .get(problemsController.getAllProblems)
-    .post(
-        verifyJWT,
-        uploadTestCaseFiles,
-        checkTestCaseFiles,
-        checkProblemData,
-        problemsController.createProblem
-    );
+router
+  .route("/")
+  .get(problemsController.getAllProblems)
+  .post(
+    verifyJWT,
+    uploadTestCaseFiles,
+    checkTestCaseFiles,
+    checkProblemData,
+    problemsController.createProblem,
+  );
 
 /**
  * @swagger
@@ -146,13 +149,10 @@ router.route('/')
  *       500:
  *         description: Internal server error
  */
-router.route('/:id')
-    .get(problemsController.getProblemById)
-    .delete(verifyJWT, problemsController.deleteProblem)
-    .put(
-        verifyJWT,
-        uploadTestCaseFiles,
-        problemsController.updateProblem
-    );
+router
+  .route("/:id")
+  .get(problemsController.getProblemById)
+  .delete(verifyJWT, problemsController.deleteProblem)
+  .put(verifyJWT, uploadTestCaseFiles, problemsController.updateProblem);
 
 module.exports = router;

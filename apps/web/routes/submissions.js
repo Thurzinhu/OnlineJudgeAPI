@@ -1,8 +1,10 @@
-const express = require('express');
+const express = require("express");
 const router = express.Router();
-const submissionsController = require('../controllers/submissionsController');
-const verifyJWT = require('../middleware/verifyJWT');
-const { checkSubmissionData } = require('../middleware/verifyModelData/Submission');
+const submissionsController = require("../controllers/submissionsController");
+const verifyJWT = require("../middleware/verifyJWT");
+const {
+  checkSubmissionData,
+} = require("../middleware/verifyModelData/Submission");
 
 /**
  * @swagger
@@ -71,9 +73,10 @@ router.use(verifyJWT);
  *       500:
  *         description: Internal server error
  */
-router.route('/')
-    .get(submissionsController.getAllSubmissions)
-    .post(checkSubmissionData, submissionsController.createSubmission);
+router
+  .route("/")
+  .get(submissionsController.getAllSubmissions)
+  .post(checkSubmissionData, submissionsController.createSubmission);
 
 /**
  * @swagger
@@ -102,7 +105,6 @@ router.route('/')
  *       500:
  *         description: Internal server error
  */
-router.route('/:id')
-    .get(submissionsController.getSubmissionById);
+router.route("/:id").get(submissionsController.getSubmissionById);
 
 module.exports = router;
