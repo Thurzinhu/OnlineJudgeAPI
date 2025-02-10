@@ -15,6 +15,7 @@ services:
     depends_on:
       - mongo
       - judge0
+      - publish-problems
     env_file: .env
     restart: always
 
@@ -29,6 +30,15 @@ services:
       - judge0
     env_file: .env
     restart: always
+
+  publish-problems:
+    build:
+      context: .
+      target: publish-problems
+    depends_on:
+      - mongo
+    env_file: .env
+    restart: no
 
   mongo:
     image: mongo

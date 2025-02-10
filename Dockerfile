@@ -25,3 +25,9 @@ FROM base AS submission-webhook-production
 RUN npm prune --production
 COPY ./apps/submission-webhook ./submission-webhook
 CMD ["npm", "run", "submission-webhook-production"]
+
+FROM base AS publish-problems
+COPY ./apps/publish-problems ./publish-problems
+COPY ./apps/boilerplate-generator ./boilerplate-generator
+COPY ./apps/problems ./problems
+CMD ["node", "./publish-problems/index.js"]
