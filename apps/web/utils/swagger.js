@@ -74,34 +74,26 @@ const options = {
               type: "string",
               description: "The problem description.",
             },
-            constraints: {
+            slug: {
               type: "string",
-              description: "The problem constraints.",
-            },
-            inputFiles: {
-              type: "array",
-              items: {
-                type: "string",
-              },
-              description: "List of input file URLs or paths.",
-            },
-            solutionCode: {
-              type: "string",
-              description: "Code that solves the problem.",
+              description: "The problem slug.",
             },
             author: {
               type: "string",
               description: "The ID of the user who created the problem.",
             },
+            createdAt: {
+              type: "string",
+              format: "date-time",
+              description: "The date and time when the problem was created.",
+            },
+            updatedAt: {
+              type: "string",
+              format: "date-time",
+              description: "The date and time when the problem was last updated.",
+            },
           },
-          required: [
-            "title",
-            "description",
-            "constraints",
-            "inputFiles",
-            "solutionCode",
-            "author",
-          ],
+          required: ["title", "description", "slug"],
         },
         Submission: {
           type: "object",
@@ -116,8 +108,7 @@ const options = {
             },
             problem: {
               type: "string",
-              description:
-                "The ID of the problem to which the submission was made.",
+              description: "The ID of the problem to which the submission was made.",
             },
             code: {
               type: "string",
@@ -137,8 +128,79 @@ const options = {
               format: "date-time",
               description: "The date and time when the submission was created.",
             },
+            testCases: {
+              type: "array",
+              items: {
+                type: "string",
+                description: "The ID of the test case.",
+              },
+              description: "List of test case IDs associated with the submission.",
+            },
           },
-          required: ["user", "problem", "code", "language"],
+          required: ["user", "problem", "code"],
+        },
+        TestCase: {
+          type: "object",
+          properties: {
+            id: {
+              type: "string",
+              description: "The test case ID.",
+            },
+            submission: {
+              type: "string",
+              description: "The ID of the submission associated with the test case.",
+            },
+            status: {
+              type: "string",
+              enum: ["AC", "WA", "RE", "CE", "TLE", "Pending"],
+              description: "The status of the test case.",
+            },
+            time: {
+              type: "number",
+              description: "The time taken by the test case.",
+            },
+            memory: {
+              type: "number",
+              description: "The memory used by the test case.",
+            },
+            judge0TrackingId: {
+              type: "string",
+              description: "The Judge0 tracking ID for the test case.",
+            },
+          },
+          required: ["submission", "judge0TrackingId"],
+        },
+        DefaultCode: {
+          type: "object",
+          properties: {
+            id: {
+              type: "string",
+              description: "The default code ID.",
+            },
+            boilerplate: {
+              type: "string",
+              description: "The boilerplate code.",
+            },
+            language: {
+              type: "string",
+              description: "The programming language of the boilerplate code.",
+            },
+            problem: {
+              type: "string",
+              description: "The ID of the problem associated with the default code.",
+            },
+            createdAt: {
+              type: "string",
+              format: "date-time",
+              description: "The date and time when the default code was created.",
+            },
+            updatedAt: {
+              type: "string",
+              format: "date-time",
+              description: "The date and time when the default code was last updated.",
+            },
+          },
+          required: ["boilerplate", "problem"],
         },
       },
     },
