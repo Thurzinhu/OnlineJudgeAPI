@@ -82,12 +82,9 @@ router.route("/logout").get(logoutController.handleLogout);
  *           schema:
  *             type: object
  *             properties:
- *               firstName:
+ *               nickname:
  *                 type: string
  *                 description: The user's first name
- *               lastName:
- *                 type: string
- *                 description: The user's last name
  *               email:
  *                 type: string
  *                 description: The user's email
@@ -95,8 +92,7 @@ router.route("/logout").get(logoutController.handleLogout);
  *                 type: string
  *                 description: The user's password
  *             required:
- *               - firstName
- *               - lastName
+ *               - nickname
  *               - email
  *               - password
  *     responses:
@@ -111,7 +107,7 @@ router.route("/logout").get(logoutController.handleLogout);
  *                   type: string
  *                   description: Success message
  *       400:
- *         description: First name, last name, email, and password are required
+ *         description: nickname, email, and password are required
  *       409:
  *         description: Email already in use
  *       500:
