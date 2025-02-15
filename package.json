@@ -3,11 +3,10 @@
   "version": "1.0.0",
   "main": "index.js",
   "scripts": {
-    "start": "node ./web/index.js",
-    "dev": "nodemon ./web/index.js",
-    "submission-webhook": "nodemon ./submission-webhook/index.js",
-    "submission-webhook-production": "node ./submission-webhook/index.js",
-    "db:problems": "node ./apps/update-problems/index.js",
+    "web-app": "node ./web/index.js",
+    "web-app-dev": "nodemon ./web/index.js",
+    "submission-webhook": "node ./submission-webhook/index.js",
+    "submission-webhook-dev": "nodemon ./submission-webhook/index.js",
     "boilerplate": "node ./apps/boilerplate-generator/index.js"
   },
   "keywords": [],

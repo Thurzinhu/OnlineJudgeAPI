@@ -6,10 +6,10 @@ x-logging:
       max-size: 100M
 
 services:
-  app:
+  web-app:
     build:
       context: .
-      target: development
+      target: web-app-development
     ports:
       - "3500:3500"
     depends_on:
@@ -19,21 +19,17 @@ services:
     volumes:
       - ./apps/web:/usr/src/app/web
     env_file: .env
-    restart: always
 
   submission-webhook:
     build:
       context: .
       target: submission-webhook-development
-    expose:
-      - "4000"
     volumes:
       - ./apps/submission-webhook:/usr/src/app/submission-webhook
     depends_on:
       - mongo
       - judge0
     env_file: .env
-    restart: always
 
   publish-problems:
     build:
@@ -42,7 +38,6 @@ services:
     depends_on:
       - mongo
     env_file: .env
-    restart: no
 
   mongo:
     image: mongo
@@ -50,7 +45,6 @@ services:
       - "27017:27017"
     volumes:
       - mongodb-data:/data/db
-    restart: always
 
   judge0:
     image: judge0/judge0:1.13.1
@@ -60,7 +54,6 @@ services:
       - "2358:2358"
     privileged: true
     <<: *default-logging
-    restart: always
 
   workers:
     image: judge0/judge0:1.13.1
@@ -69,7 +62,6 @@ services:
       - ./apps/judge0/judge0.conf:/judge0.conf:ro
     privileged: true
     <<: *default-logging
-    restart: always
 
   db:
     image: postgres:16.2
@@ -77,7 +69,6 @@ services:
     volumes:
       - postgres-data:/var/lib/postgresql/data/
     <<: *default-logging
-    restart: always
 
   redis:
     image: redis:7.2.4
@@ -87,7 +78,6 @@ services:
     ]
     env_file: ./apps/judge0/judge0.conf
     <<: *default-logging
-    restart: always
 
 volumes:
   mongodb-data:
