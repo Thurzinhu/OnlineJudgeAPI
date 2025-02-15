@@ -31,13 +31,9 @@ const options = {
               type: "string",
               description: "The user ID.",
             },
-            firstName: {
+            nickname: {
               type: "string",
-              description: "The user's first name.",
-            },
-            lastName: {
-              type: "string",
-              description: "The user's last name.",
+              description: "The user's nickname.",
             },
             email: {
               type: "string",
