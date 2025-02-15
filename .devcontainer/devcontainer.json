@@ -1,0 +1,9 @@
+{
+    "name": "Online Judge API codespaces",
+    "image": "mcr.microsoft.com/devcontainers/javascript-node:18",
+    "features": {
+      "docker-in-docker": "latest"
+    },
+    "runArgs": ["--privileged"],
+    "postCreateCommand": "docker compose up -d"
+}
