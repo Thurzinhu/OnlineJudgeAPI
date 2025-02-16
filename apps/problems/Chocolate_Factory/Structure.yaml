@@ -1,0 +1,6 @@
+problem_title: "A Fábrica de Chocolates"
+function_name: calcularCaixas
+input_fields:
+  - type: int
+    name: total_barras
+output_field: tuple<int, int>
