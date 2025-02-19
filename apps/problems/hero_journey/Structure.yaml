@@ -1,0 +1,10 @@
+problem_title: "A Jornada do Herói"
+function_name: jornadaDoHeroi
+input_fields:
+  - type: int
+    name: n
+  - type: int
+    name: p
+  - type: list<int>
+    name: poder
+output_field: string

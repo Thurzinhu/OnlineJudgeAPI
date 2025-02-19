@@ -1,0 +1,6 @@
+problem_title: "A Fábrica de Chocolates"
+function_name: calcularCaixas
+input_fields:
+  - type: int
+    name: n
+output_field: list<int>
