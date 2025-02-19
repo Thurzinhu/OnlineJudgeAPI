@@ -1,4 +1,5 @@
 ##USER_CODE_HERE##
+
 const input = require('fs').readFileSync('/dev/stdin', 'utf8').trim().split('\n').join(' ').split(' ');
 const size_estoque = parseInt(input.shift());
 const estoque = input.splice(0, size_estoque).map(Number);

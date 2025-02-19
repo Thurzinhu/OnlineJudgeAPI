@@ -1,3 +1,3 @@
 function hayDay(estoque, pedido) {
-  //implemente aqui
+	//implemente aqui
 }
