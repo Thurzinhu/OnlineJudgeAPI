@@ -1,0 +1,8 @@
+problem_title: "Pirata Barba Ruiva - Posição do Pirata"
+function_name: posicaoPirata
+input_fields:
+  - type: int
+    name: n
+  - type: list<int>
+    name: passos
+output_field: list<int>

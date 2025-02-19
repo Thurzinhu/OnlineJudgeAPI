@@ -1,0 +1,6 @@
+problem_title: "O Jogo dos Números Perdidos"
+function_name: encontrarNumeroPerdido
+input_fields:
+  - type: list<int>
+    name: sequencia
+output_field: int
