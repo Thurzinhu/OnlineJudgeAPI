@@ -22,7 +22,7 @@ Onde cada número representa um movimento do pirata:
 
 ## Saída
 
-A posição final de Barba Ruiva no formato (x, y), onde x é a coordenada leste-oeste e y é a coordenada norte-sul.
+A posição final de Barba Ruiva no formato `x y`, onde x é a coordenada leste-oeste e y é a coordenada norte-sul.
 
 ## Exemplo
 
@@ -34,7 +34,7 @@ A posição final de Barba Ruiva no formato (x, y), onde x é a coordenada leste
 ```
 **Saída:**  
 ```
-(-6, 7);  
+-6 7 
 ```
 
 **Explicação**
@@ -67,7 +67,7 @@ A posição final de Barba Ruiva no formato (x, y), onde x é a coordenada leste
 ```
 **Saída:**  
 ```
-(17, 10);  
+17 10  
 ```
 
 **Explicação**
