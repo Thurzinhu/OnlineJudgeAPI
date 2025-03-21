@@ -1,18 +1,28 @@
+import NavBar from "@/components/nav-bar/nav-bar";
+import { ThemeProvider } from "@/components/theme-provider";
+
 import "./globals.css";
 
-
-export default function RootLayout({
-  children,
-}: Readonly<{
+interface RootLayoutProps {
   children: React.ReactNode;
-}>) {
+}
+
+export default function RootLayout({ children }: RootLayoutProps) {
   return (
-    <html lang="en">
-      <body
-        className={`antialiased`}
-      >
-        {children}
-      </body>
-    </html>
-  );
+    <>
+      <html lang="en" suppressHydrationWarning>
+        <head />
+        <body>
+          <ThemeProvider
+            attribute="class"
+            defaultTheme="system"
+            enableSystem
+          >
+            <NavBar />
+            {children}
+          </ThemeProvider>
+        </body>
+      </html>
+    </>
+  )
 }
