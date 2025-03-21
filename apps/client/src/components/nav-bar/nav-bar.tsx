@@ -26,7 +26,7 @@ const navItems = [
 export default function NavBar() {
 
     return (
-        <header className="sticky top-0 z-50 w-screen h-16 border-b border-border/40 bg-background/80 backdrop-blur-md">
+        <header className="sticky top-0 z-50 w-screen h-16 border-b border-border/40 bg-background/80 backdrop-blur-md mb-12">
             <NavigationMenu className="container h-16 flex items-center justify-between px-8 max-w-full">
                 <NavigationMenuList className="flex items-center justify-center flex-1">
                     <NavItem href="/" className="hover:bg-transparent" >
