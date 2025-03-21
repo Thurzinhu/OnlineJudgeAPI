@@ -35,7 +35,7 @@ export default function ProblemsCard({ id, title, description, tags, totalSoluti
     <Card className={cn(
         "group pb-0 scale-100 transition-all duration-300 ease-in-out hover:scale-102 hover:shadow-md",
         isSolved && "border-emerald-500/20 bg-emerald-50/50 dark:bg-emerald-900/5",
-        (hasTried && !isSolved) && "bg-warning/10",
+        (hasTried && !isSolved) && "border-red-500/20 bg-red-50/50 dark:bg-red-900/5",
       )}
       >
       <CardHeader>
