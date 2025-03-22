@@ -6,10 +6,11 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { cn } from "@/lib/utils";
+import { cn, extractMarkdownSectionContent } from "@/lib/utils";
 import Link from "next/link";
 import { Badge } from "../ui/badge";
 import { Problem, ProblemDifficulty } from "@/types/Problem";
+import MarkdownRender from "../markdown-render";
 
 interface ProblemCardProps extends Problem {
   isSolved?: boolean;
@@ -30,6 +31,7 @@ export default function ProblemCard({ id, title, description, tags, totalSolutio
         "group pb-0 scale-100 transition-all duration-300 ease-in-out hover:scale-102 hover:shadow-md",
         isSolved && "border-emerald-500/20 bg-emerald-50/50 dark:bg-emerald-900/5",
         (hasTried && !isSolved) && "border-red-500/20 bg-red-50/50 dark:bg-red-900/5",
+        "flex flex-col h-full"
       )}
       >
       <CardHeader>
@@ -55,10 +57,10 @@ export default function ProblemCard({ id, title, description, tags, totalSolutio
           </Link>
         </CardTitle>
       </CardHeader>
-      <CardContent>
-        <CardDescription className="mb-4">
+      <CardContent className="flex-grow">
+        <CardDescription className="mb-4 flex-1">
           <p className="line-clamp-3">
-            { description }
+            <MarkdownRender markdown={extractMarkdownSectionContent(description, "Descrição") || extractMarkdownSectionContent(description, "Description")} />
           </p>
         </CardDescription>
         <section role="group" aria-label="Problem tags" className="flex flex-wrap gap-2">
@@ -69,7 +71,7 @@ export default function ProblemCard({ id, title, description, tags, totalSolutio
           )) }
         </section>
       </CardContent>
-      <CardFooter className="bg-accent text-accent-foreground/40 flex justify-between items-center py-2 px-4 rounded-b-xl mb-0">
+      <CardFooter className="bg-accent text-accent-foreground/40 flex justify-between items-center py-2 rounded-b-xl mt-auto">
         <span className="text-xs font-medium p-0 m-0">{ totalSolutions } solutions</span>
         <Link href={`/problems/${id}`} className="flex items-center justify-center text-primary no-underline text-xs font-medium p-0 m-0">
           Solve Challenge →
