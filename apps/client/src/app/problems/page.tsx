@@ -1,5 +1,6 @@
 import ProblemList from "@/components/problems/problem-list";
 import ListLayout from "@/components/problems/problem-list-layout";
+import ProblemListSkeleton from "@/components/skeletons/problem-list";
 import { Suspense } from "react";
 
 
@@ -24,7 +25,7 @@ export default async function ProblemsPage({ searchParams }: ProblemsPageProps) 
 
             <section role="search" aria-label="Problems filters"></section>
 
-            <Suspense fallback={<div>Loading...</div>}>
+            <Suspense fallback={<ProblemListSkeleton pageSize={pageSize} />}>
                 <ProblemList page={page} pageSize={pageSize} />
             </Suspense>
         </main>
