@@ -25,7 +25,7 @@ const difficultyColors: Record<ProblemDifficulty, string> = {
 };
 
 
-export default function ProblemCard({ id, title, description, tags, totalSolutions=0, difficulty, isSolved=false, hasTried=false }: ProblemCardProps) {
+export default function ProblemCard({ _id, title, description, tags, totalSolutions=0, difficulty, slug, isSolved=false, hasTried=false }: ProblemCardProps) {
   return (
     <Card className={cn(
         "group pb-0 scale-100 transition-all duration-300 ease-in-out hover:scale-102 hover:shadow-md",
@@ -52,12 +52,12 @@ export default function ProblemCard({ id, title, description, tags, totalSolutio
           ) }
         </section>
         <CardTitle>
-          <Link href={`/problems/${id}`} className="text-xl font-medium no-underline group-hover:text-primary">
+          <Link href={`/problems/${slug}`} className="text-xl font-medium no-underline group-hover:text-primary">
             { title }
           </Link>
         </CardTitle>
       </CardHeader>
-      <CardContent className="flex-grow">
+      <CardContent>
         <CardDescription className="mb-4 flex-1">
           <p className="line-clamp-3">
             <MarkdownRender markdown={extractMarkdownSectionContent(description, "Descrição") || extractMarkdownSectionContent(description, "Description")} />
@@ -73,7 +73,7 @@ export default function ProblemCard({ id, title, description, tags, totalSolutio
       </CardContent>
       <CardFooter className="bg-accent text-accent-foreground/40 flex justify-between items-center py-2 rounded-b-xl mt-auto">
         <span className="text-xs font-medium p-0 m-0">{ totalSolutions } solutions</span>
-        <Link href={`/problems/${id}`} className="flex items-center justify-center text-primary no-underline text-xs font-medium p-0 m-0">
+        <Link href={`/problems/${slug}`} className="flex items-center justify-center text-primary no-underline text-xs font-medium p-0 m-0">
           Solve Challenge →
         </Link>
       </CardFooter>
