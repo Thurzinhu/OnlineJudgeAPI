@@ -1,20 +1,32 @@
-import Card from "@/components/problems/problem-card";
+import ProblemList from "@/components/problems/problem-list";
+import { Suspense } from "react";
 
-export default function ProblemsPage() {
+
+interface ProblemsPageProps {
+    searchParams: Promise<{
+        page?: number;
+    }>;
+}
+
+export default async function ProblemsPage({ searchParams }: ProblemsPageProps) {
+    const { page=1 } = await searchParams;
+    const pageSize = 40;
+
     return (
         <main className="mx-auto max-w-screen md:px-8 flex flex-col gap-4">
             <header className="flex justify-between items-center">
                 <h1 className="text-3xl font-medium tracking-wide">Problems</h1>
-                <div className="hidden md:flex gap-2">
+                <section role="toolbar" aria-label="Layout options for desktop" className="hidden md:flex gap-2">
                     <button>Filter</button>
                     <button>Sort</button>
-                </div>
+                </section>
             </header>
 
-            <section data-slot="problems__filters"></section>
+            <section role="search" aria-label="Problems filters"></section>
 
-            <section data-slot="problems__content" className="grid grid-cols-1 md:grid-cols-2 gap-4">  
-            </section>
+            <Suspense fallback={<div>Loading...</div>}>
+                <ProblemList page={page} pageSize={pageSize} />
+            </Suspense>
         </main>
     );
 }
