@@ -58,10 +58,8 @@ export default function ProblemCard({ _id, title, description, tags, totalSoluti
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <CardDescription className="mb-4 flex-1">
-          <p className="line-clamp-3">
-            <MarkdownRender markdown={extractMarkdownSectionContent(description, "Descrição") || extractMarkdownSectionContent(description, "Description")} />
-          </p>
+        <CardDescription className="mb-4 flex-1 line-clamp-3">
+          <MarkdownRender markdown={extractMarkdownSectionContent(description, "Descrição") || extractMarkdownSectionContent(description, "Description")} />
         </CardDescription>
         <section role="group" aria-label="Problem tags" className="flex flex-wrap gap-2">
           { tags?.map((tag) => (
