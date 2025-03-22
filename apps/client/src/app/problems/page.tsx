@@ -1,4 +1,5 @@
 import ProblemList from "@/components/problems/problem-list";
+import ListLayout from "@/components/problems/problem-list-layout";
 import { Suspense } from "react";
 
 
@@ -8,6 +9,8 @@ interface ProblemsPageProps {
     }>;
 }
 
+// TODO: Implement pagination, filtering, and sorting
+
 export default async function ProblemsPage({ searchParams }: ProblemsPageProps) {
     const { page=1 } = await searchParams;
     const pageSize = 40;
@@ -16,10 +19,7 @@ export default async function ProblemsPage({ searchParams }: ProblemsPageProps) 
         <main className="mx-auto max-w-screen md:px-8 flex flex-col gap-4">
             <header className="flex justify-between items-center">
                 <h1 className="text-3xl font-medium tracking-wide">Problems</h1>
-                <section role="toolbar" aria-label="Layout options for desktop" className="hidden md:flex gap-2">
-                    <button>Filter</button>
-                    <button>Sort</button>
-                </section>
+                <ListLayout />
             </header>
 
             <section role="search" aria-label="Problems filters"></section>
