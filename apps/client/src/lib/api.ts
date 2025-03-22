@@ -12,3 +12,12 @@ export async function getProblems(page: number, pageSize: number) {
 
     return { data, totalCount };
 }
+
+export async function getProblem(slug: string) {
+    const res = await fetch(`${process.env.WEB_URL}/problems/${slug}`, {
+        cache: "force-cache",
+    });
+    const data: Problem = await res.json();
+
+    return data;
+}
