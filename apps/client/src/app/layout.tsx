@@ -19,7 +19,7 @@ export default function RootLayout({ children }: RootLayoutProps) {
             defaultTheme="system"
             enableSystem
           >
-            <Lenis>
+            <Lenis root>
               <NavBar />
               {children}
             </Lenis>
