@@ -9,18 +9,12 @@ import {
 import { cn } from "@/lib/utils";
 import Link from "next/link";
 import { Badge } from "../ui/badge";
+import { Problem, ProblemDifficulty } from "@/types/Problem";
 
-type ProblemDifficulty = "easy" | "medium" | "hard";
-
-interface ProblemsCardProps {
-  id: string;
-  title: string;
-  description: string;
-  tags?: string[];
-  totalSolutions: number;
-  difficulty?: ProblemDifficulty;
+interface ProblemCardProps extends Problem {
   isSolved?: boolean;
   hasTried?: boolean;
+  totalSolutions?: number;
 }
 
 const difficultyColors: Record<ProblemDifficulty, string> = {
@@ -30,7 +24,7 @@ const difficultyColors: Record<ProblemDifficulty, string> = {
 };
 
 
-export default function ProblemsCard({ id, title, description, tags, totalSolutions, difficulty, isSolved=false, hasTried=false }: ProblemsCardProps) {
+export default function ProblemCard({ id, title, description, tags, totalSolutions=0, difficulty, isSolved=false, hasTried=false }: ProblemCardProps) {
   return (
     <Card className={cn(
         "group pb-0 scale-100 transition-all duration-300 ease-in-out hover:scale-102 hover:shadow-md",
@@ -39,7 +33,7 @@ export default function ProblemsCard({ id, title, description, tags, totalSoluti
       )}
       >
       <CardHeader>
-        <section data-slot="card__header-tags" className="flex items-center justify-start flex-wrap gap-2 -ml-2.5">
+        <section role="group" aria-label="Problem status and difficulty tags" className="flex items-center justify-start flex-wrap gap-2 -ml-2.5">
           { difficulty && (
             <Badge variant={null} className={cn(
               "text-xs font-medium rounded-full w-max px-2 py-1",
@@ -67,7 +61,7 @@ export default function ProblemsCard({ id, title, description, tags, totalSoluti
             { description }
           </p>
         </CardDescription>
-        <section data-slot="card__content-tags" className="flex flex-wrap gap-2">
+        <section role="group" aria-label="Problem tags" className="flex flex-wrap gap-2">
           { tags?.map((tag) => (
             <Badge variant={null} key={tag} className="text-xs font-medium rounded-full bg-accent text-accent-foreground w-max px-2 py-1">
               { tag }
