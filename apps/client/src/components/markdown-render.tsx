@@ -48,11 +48,11 @@ const MarkdownRender = ({ markdown, className }: MarkdownRenderProps) => {
   };
 
   return (
-    <div data-slot="markdown-render" className={cn(className, "prose dark:prose-invert min-w-full")}>
+    <section data-slot="markdown-render" className={cn(className, "prose dark:prose-invert min-w-full")}>
       <ReactMarkdown rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]} components={components}>
         {markdown}
       </ReactMarkdown>
-    </div>
+    </section>
   );
 };
 
