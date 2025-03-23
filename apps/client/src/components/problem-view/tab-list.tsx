@@ -27,14 +27,17 @@ export default function TabList({ description }: TabListProps) {
                     Submissions
                     </TabsTrigger>
             </TabsList>
-            <TabsContent value="description</svg>" className="px-6 py-6">
+
+            <TabsContent value="description" className="px-6 py-6">
                 <ScrollArea className="w-full h-[80dvh] text-justify text-wrap antialiased font-sans text-md" data-lenis-prevent>
                     <MarkdownRender markdown={extractMarkdownStartAtSection(description, "Descrição") || extractMarkdownStartAtSection(description, "Description")} />
                     <br />
                 </ScrollArea>
             </TabsContent>
+
             <TabsContent value="my-submissions" className="px-6 py-6 h-[80dvh]">
             </TabsContent>
+
             <TabsContent value="submissions" className="px-6 py-6 h-[80dvh]">
             </TabsContent>
         </Tabs>
