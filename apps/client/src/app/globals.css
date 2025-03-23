@@ -115,7 +115,7 @@
   * {
     @apply border-border outline-ring/50;
   }
-  body {
+  body, html, #__next {
     @apply bg-background text-foreground min-h-screen antialiased;
   }
 }
@@ -123,7 +123,7 @@
 @layer utilities {
   /* remove prose style on pre tags placed by ReactMarkdown */
   #problem__description :where(pre):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
-    @apply bg-transparent text-inherit px-0 py-0 w-full;
+    @apply bg-transparent text-inherit px-0 py-0 w-full h-max;
   }
 }
 

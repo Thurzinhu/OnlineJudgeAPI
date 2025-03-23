@@ -12,7 +12,7 @@ interface ProblemLayoutProps {
 
 export default function Layout({ code, description, tests }: ProblemLayoutProps) {
   return (
-    <main className="flex flex-col items-center justify-center w-full p-4 ">
+    <main className="flex flex-col items-center justify-center w-full p-4 h-full">
         <ResizablePanelGroup
             direction="horizontal"
         >
@@ -31,7 +31,7 @@ export default function Layout({ code, description, tests }: ProblemLayoutProps)
                         {code}
                     </ResizablePanel>
 
-                    <ResizableHandle className="bg-transparent basis-4" />
+                    <ResizableHandle className="bg-transparent basis-4"/>
                     
                     <ResizablePanel defaultSize={75} className="shrink bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm hover:inset-ring-5 hover:inset-ring-accent/50">
                         {tests}
