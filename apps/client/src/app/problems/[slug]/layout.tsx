@@ -12,7 +12,7 @@ interface ProblemLayoutProps {
 
 export default function Layout({ code, description, tests }: ProblemLayoutProps) {
   return (
-    <main className="flex flex-col items-center justify-center w-full p-4 h-full">
+    <main className="flex flex-col items-center justify-center w-full p-2 lg:p-4 h-full">
         <ResizablePanelGroup
             direction="horizontal"
         >

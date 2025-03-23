@@ -4,12 +4,14 @@ import rehypeRaw from 'rehype-raw';
 import remarkGfm from 'remark-gfm';
 import { Prism as SyntaxHighlighter } from 'react-syntax-highlighter';
 import { syntaxHighlighter } from "../constants/theme";
+import { cn } from '@/lib/utils';
 
 interface MarkdownRenderProps {
   markdown: string;
+  className?: string;
 }
 
-const MarkdownRender = ({ markdown }: MarkdownRenderProps) => {
+const MarkdownRender = ({ markdown, className }: MarkdownRenderProps) => {
   const components: Components = {
     code({ node, className, children, ...props }) {
       
@@ -46,7 +48,7 @@ const MarkdownRender = ({ markdown }: MarkdownRenderProps) => {
   };
 
   return (
-    <div id="problem__description" className="prose dark:prose-invert prose-xl text-foreground! min-w-full">
+    <div id="problem__description" className={cn(className, "prose dark:prose-invert min-w-full")}>
       <ReactMarkdown rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]} components={components}>
         {markdown}
       </ReactMarkdown>
