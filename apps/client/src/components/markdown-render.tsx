@@ -48,7 +48,7 @@ const MarkdownRender = ({ markdown, className }: MarkdownRenderProps) => {
   };
 
   return (
-    <div id="problem__description" className={cn(className, "prose dark:prose-invert min-w-full")}>
+    <div data-slot="markdown-render" className={cn(className, "prose dark:prose-invert min-w-full")}>
       <ReactMarkdown rehypePlugins={[rehypeRaw]} remarkPlugins={[remarkGfm]} components={components}>
         {markdown}
       </ReactMarkdown>

@@ -122,7 +122,7 @@
 
 @layer utilities {
   /* remove prose style on pre tags placed by ReactMarkdown */
-  #problem__description :where(pre):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+  [data-slot="markdown-render"] :where(pre):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
     @apply bg-transparent text-inherit px-0 py-0 w-full h-max;
   }
 }
