@@ -52,14 +52,14 @@ export default function ProblemCard({ _id, title, description, tags, totalSoluti
           ) }
         </section>
         <CardTitle>
-          <Link href={`/problems/${slug}`} className="text-xl font-medium no-underline group-hover:text-primary">
+          <Link href={`/problems/${_id}`} className="text-lg sm:text-xl font-medium no-underline group-hover:text-primary">
             { title }
           </Link>
         </CardTitle>
       </CardHeader>
       <CardContent>
-        <CardDescription className="mb-4 flex-1 line-clamp-3">
-          <MarkdownRender markdown={extractMarkdownSectionContent(description, "Descrição") || extractMarkdownSectionContent(description, "Description")} />
+        <CardDescription className="mb-4 flex-1">
+          <MarkdownRender className="no-prose! line-clamp-3 text-md text-justify" markdown={extractMarkdownSectionContent(description, "Descrição") || extractMarkdownSectionContent(description, "Description")} />
         </CardDescription>
         <section role="group" aria-label="Problem tags" className="flex flex-wrap gap-2">
           { tags?.map((tag) => (
@@ -71,7 +71,7 @@ export default function ProblemCard({ _id, title, description, tags, totalSoluti
       </CardContent>
       <CardFooter className="bg-accent text-accent-foreground/40 flex justify-between items-center py-2 rounded-b-xl mt-auto">
         <span className="text-xs font-medium p-0 m-0">{ totalSolutions } solutions</span>
-        <Link href={`/problems/${slug}`} className="flex items-center justify-center text-primary no-underline text-xs font-medium p-0 m-0">
+        <Link href={`/problems/${_id}`} className="flex items-center justify-center text-primary no-underline text-xs font-medium p-0 m-0">
           Solve Challenge →
         </Link>
       </CardFooter>

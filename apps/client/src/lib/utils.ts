@@ -22,3 +22,24 @@ export function extractMarkdownSectionContent(markdown: string, sectionName: str
   // Return the content (capture group 1) or empty string if not found
   return match ? match[1].trim() : "";
 }
+
+export function extractMarkdownStartAtSection(
+  markdown: string,
+  sectionName: string
+): string {
+  // Escape special regex characters in the section name
+  const escapedSectionName = sectionName.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+
+  // Define the regex pattern to match from the section name to the end of the document
+  // This handles both \n and \r\n line breaks
+  const pattern = new RegExp(
+    `(?:^|\\r?\\n)##\\s*${escapedSectionName}\\s*(?:\\r?\\n|$)((?:\\r?\\n|.)*?)$`,
+    "i"
+  );
+
+  // Search for the pattern in the markdown text
+  const match = markdown.match(pattern);
+
+  // Return the content (capture group 1) or empty string if not found
+  return match ? match[1].trim() : "";
+}
