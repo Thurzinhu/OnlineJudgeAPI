@@ -1,5 +1,6 @@
 @import "tailwindcss";
 @import "tw-animate-css";
+@plugin '@tailwindcss/typography';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -114,8 +115,23 @@
   * {
     @apply border-border outline-ring/50;
   }
-  body {
-    @apply bg-background text-foreground;
+  body, html, #__next {
+    @apply bg-background text-foreground min-h-screen antialiased;
   }
+}
+
+@layer utilities {
+  /* remove prose style on pre tags placed by ReactMarkdown */
+  [data-slot="markdown-render"] :where(pre):not(:where([class~="not-prose"],[class~="not-prose"] *)) {
+    @apply bg-transparent text-inherit px-0 py-0 w-full h-max;
+  }
+}
+
+/* Override Monaco Editor styles */
+.monaco-editor,
+.monaco-editor .margin,
+.monaco-editor-background,
+.monaco-editor .inputarea.ime-input {
+  background-color: var(--card) !important;
 }
 
