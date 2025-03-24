@@ -27,7 +27,7 @@ export default function Layout({ code, description, tests }: ProblemLayoutProps)
                 <ResizablePanelGroup 
                     direction="vertical"
                 >
-                    <ResizablePanel defaultSize={25} className="shrink bg-card text-card-foreground flex flex-col gap-6 rounded-xl border py-6 shadow-sm hover:inset-ring-5 hover:inset-ring-accent/50">
+                    <ResizablePanel defaultSize={25} className="shrink bg-card text-card-foreground rounded-xl border shadow-sm">
                         {code}
                     </ResizablePanel>
 
