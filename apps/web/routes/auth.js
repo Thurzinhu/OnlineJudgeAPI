@@ -220,4 +220,51 @@ router.route("/register").post(checkUserData, registerController.handleNewUser);
  */
 router.route("/refreshToken").get(refreshTokenController.handleRefreshToken);
 
+/**
+ * @swagger
+ * /api/auth/check-login:
+ *   get:
+ *     summary: Check if the user is logged in
+ *     tags: [Auth]
+ *     responses:
+ *       200:
+ *         description: User is logged in
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: object
+ *               properties:
+ *                 loggedIn:
+ *                   type: boolean
+ *                   description: Whether the user is logged in or not
+ *                 user:
+ *                   type: object
+ *                   properties:
+ *                     email:
+ *                       type: string
+ *                       description: The user's email
+ *                     nickname:
+ *                       type: string
+ *                       description: The user's nickname
+ *       401:
+ *         description: User is not logged in
+ *       500:
+ *         description: Internal server error
+ */
+router.route("/status").get((req, res) => {
+    if (req.isAuthenticated()) {
+        return res.status(200).json({
+            loggedIn: true,
+            user: {
+                ...req.user
+            }
+        });
+    } else {
+        return res.status(401).json({
+            loggedIn: false,
+            message: "User is not logged in"
+        });
+    }
+});
+
 module.exports = router;
