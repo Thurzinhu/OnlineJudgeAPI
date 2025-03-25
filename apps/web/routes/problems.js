@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const problemsController = require("../controllers/problemsController");
-const verifyJWT = require("../middleware/verifyJWT");
+const verifyAuth = require("../middleware/verifyAuth");
 const { checkProblemData } = require("../middleware/verifyModelData/Problem");
 const {
   checkTestCaseFiles,
@@ -63,7 +63,7 @@ router
   .route("/")
   .get(problemsController.getAllProblems)
   .post(
-    verifyJWT,
+    verifyAuth,
     uploadTestCaseFiles,
     checkTestCaseFiles,
     checkProblemData,
@@ -152,7 +152,7 @@ router
 router
   .route("/:id")
   .get(problemsController.getProblemById)
-  .delete(verifyJWT, problemsController.deleteProblem)
-  .put(verifyJWT, uploadTestCaseFiles, problemsController.updateProblem);
+  .delete(verifyAuth, problemsController.deleteProblem)
+  .put(verifyAuth, uploadTestCaseFiles, problemsController.updateProblem);
 
 module.exports = router;
