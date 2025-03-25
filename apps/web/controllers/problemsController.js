@@ -1,5 +1,6 @@
 const ProblemDAO = require("../../lib/persistence/dao/ProblemDAO");
 const problemDAO = new ProblemDAO();
+const Paginator = require("../utils/Paginator");
 
 const getProblemById = async (req, res) => {
   try {
@@ -10,13 +11,37 @@ const getProblemById = async (req, res) => {
   }
 };
 
+const getProblemBySlug = async (req, res) => {
+  try {
+    const foundProblem = await problemDAO.getBySlug(req.params.slug);
+    res.json(foundProblem);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+}
+
 const getAllProblems = async (req, res) => {
   try {
-    const problems = await problemDAO.getAll();
-    if (!problems) {
+    const allProblems = await problemDAO.getAll();
+    if (!allProblems || allProblems.length === 0) {
       return res.status(204).json({ message: "No problems found." });
     }
-    res.json(problems);
+    const problemsPerPage = 30;
+    const paginator = new Paginator(allProblems, problemsPerPage);
+    const page = Number(req.query.page) || 1;
+    let paginatedProblems;
+    try {
+      paginatedProblems = paginator.page(page);
+    } catch (err) {
+      if (err instanceof Paginator.PageNotIntegerError) {
+        paginatedProblems = paginator.page(1);
+      } else if (err instanceof Paginator.EmptyPageError) {
+        paginatedProblems = paginator.page(paginator.totalPages);
+      } else {
+        throw err;
+      }
+    }
+    return res.json(paginatedProblems);
   } catch (error) {
     res.status(500).json({ message: error.message });
   }
@@ -74,4 +99,5 @@ module.exports = {
   createProblem,
   updateProblem,
   deleteProblem,
+  getProblemBySlug
 };
