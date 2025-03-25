@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const submissionsController = require("../controllers/submissionsController");
-const verifyJWT = require("../middleware/verifyJWT");
+const verifyAuth = require("../middleware/verifyAuth");
 const {
   checkSubmissionData,
 } = require("../middleware/verifyModelData/Submission");
@@ -13,7 +13,7 @@ const {
  *   description: API endpoints for managing submissions
  */
 
-router.use(verifyJWT);
+router.use(verifyAuth);
 
 /**
  * @swagger
