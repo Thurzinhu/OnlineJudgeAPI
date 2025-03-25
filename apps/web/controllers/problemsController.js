@@ -10,6 +10,15 @@ const getProblemById = async (req, res) => {
   }
 };
 
+const getProblemBySlug = async (req, res) => {
+  try {
+    const foundProblem = await problemDAO.getBySlug(req.params.slug);
+    res.json(foundProblem);
+  } catch (err) {
+    res.status(500).json({ error: err.message });
+  }
+}
+
 const getAllProblems = async (req, res) => {
   try {
     const problems = await problemDAO.getAll();
@@ -74,4 +83,5 @@ module.exports = {
   createProblem,
   updateProblem,
   deleteProblem,
+  getProblemBySlug
 };

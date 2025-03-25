@@ -72,17 +72,17 @@ router
 
 /**
  * @swagger
- * /api/problems/{id}:
+ * /api/problems/{slug}:
  *   get:
- *     summary: Get problem by ID
+ *     summary: Get problem by Slug
  *     tags: [Problems]
  *     parameters:
  *       - in: path
- *         name: id
+ *         name: slug
  *         schema:
  *           type: string
  *         required: true
- *         description: The problem ID
+ *         description: The problem Slug
  *     responses:
  *       200:
  *         description: Successful response
@@ -95,17 +95,17 @@ router
  *       500:
  *         description: Internal server error
  *   put:
- *     summary: Update problem by ID
+ *     summary: Update problem by Slug
  *     tags: [Problems]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: id
+ *         name: slug
  *         schema:
  *           type: string
  *         required: true
- *         description: The problem ID
+ *         description: The problem Slug
  *     requestBody:
  *       required: true
  *       content:
@@ -128,17 +128,17 @@ router
  *       500:
  *         description: Internal server error
  *   delete:
- *     summary: Delete problem by ID
+ *     summary: Delete problem by Slug
  *     tags: [Problems]
  *     security:
  *       - bearerAuth: []
  *     parameters:
  *       - in: path
- *         name: id
+ *         name: slug
  *         schema:
  *           type: string
  *         required: true
- *         description: The problem ID
+ *         description: The problem Slug
  *     responses:
  *       204:
  *         description: Problem deleted successfully
@@ -150,8 +150,8 @@ router
  *         description: Internal server error
  */
 router
-  .route("/:id")
-  .get(problemsController.getProblemById)
+  .route("/:slug")
+  .get(problemsController.getProblemBySlug)
   .delete(verifyAuth, problemsController.deleteProblem)
   .put(verifyAuth, uploadTestCaseFiles, problemsController.updateProblem);
 
