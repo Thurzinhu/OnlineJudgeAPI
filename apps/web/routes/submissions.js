@@ -13,6 +13,34 @@ const {
  *   description: API endpoints for managing submissions
  */
 
+/**
+ * @swagger
+ * /api/submissions/problem/{id}:
+ *   get:
+ *     summary: Get all submissions to a problem
+ *     tags: [Submissions]
+ *     parameters:
+ *       - in: path
+ *         name: id
+ *         schema:
+ *           type: string
+ *         required: true
+ *         description: The problem ID
+ *     responses:
+ *       200:
+ *         description: Submissions data
+ *         content:
+ *           application/json:
+ *             schema:
+ *               type: array
+ *               $ref: '#/components/schemas/Submission'
+ *       204:
+ *         description: No submission found with the given problem ID
+ *       500:
+ *         description: Internal server error
+ */
+router.route("/problem/:id").get(submissionsController.getAllSubmissionsByProblem);
+
 router.use(verifyAuth);
 
 /**
@@ -75,7 +103,7 @@ router.use(verifyAuth);
  */
 router
   .route("/")
-  .get(submissionsController.getAllSubmissions)
+  .get(submissionsController.getAllSubmissionsByUser)
   .post(checkSubmissionData, submissionsController.createSubmission);
 
 /**

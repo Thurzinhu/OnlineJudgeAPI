@@ -4,7 +4,19 @@ const TestCaseDAO = require("../../lib/persistence/dao/TestCaseDAO");
 const testCaseDAO = new TestCaseDAO();
 const { handleJudgeSubmission } = require("../utils/judge0SubmissionHandler");
 
-const getAllSubmissions = async (req, res) => {
+const getAllSubmissionsByProblem = async (req, res) => {
+  try {
+    const submissions = await submissionDAO.getAllByProblem(req.params.id);
+    if (!submissions) {
+      return res.status(204).json({ message: "No submissions found for this problem." });
+    }
+    res.json(submissions);
+  } catch (error) {
+    res.status(500).json({ message: error.message });
+  }
+};
+
+const getAllSubmissionsByUser = async (req, res) => {
   try {
     const submissions = await submissionDAO.getAllByUser(req.userId);
     if (!submissions) {
@@ -57,7 +69,8 @@ const createSubmission = async (req, res) => {
 };
 
 module.exports = {
-  getAllSubmissions,
+  getAllSubmissionsByUser,
   getSubmissionById,
   createSubmission,
+  getAllSubmissionsByProblem
 };
