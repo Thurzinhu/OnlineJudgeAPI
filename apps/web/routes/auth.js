@@ -222,7 +222,7 @@ router.route("/refreshToken").get(refreshTokenController.handleRefreshToken);
 
 /**
  * @swagger
- * /api/auth/check-login:
+ * /api/auth/status:
  *   get:
  *     summary: Check if the user is logged in
  *     tags: [Auth]

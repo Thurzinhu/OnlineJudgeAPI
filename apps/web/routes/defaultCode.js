@@ -28,11 +28,7 @@ const defaultCodeController = require("../controllers/defaultCodeController");
  *         content:
  *           application/json:
  *             schema:
- *               type: object
- *               properties:
- *                 code:
- *                   type: string
- *                   description: The default code for the problem
+ *               $ref: '#/components/schemas/DefaultCode'
  *       404:
  *         description: No problem matches the provided ID
  *       500:
